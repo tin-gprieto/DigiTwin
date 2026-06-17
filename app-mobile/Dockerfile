@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:20-alpine AS base
 
 WORKDIR /app
 
@@ -9,9 +9,17 @@ RUN corepack enable pnpm
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm install --frozen-lockfile
 
-# Copy source code and build
-COPY . .
 ENV NEXT_TELEMETRY_DISABLED 1
+
+# --- dev: hot-reload, source mounted at runtime via docker-compose.override.yml ---
+FROM base AS dev
+EXPOSE 3000
+CMD ["pnpm", "dev"]
+
+# --- production: bakes the source in and serves a built app ---
+FROM base AS production
+
+COPY . .
 
 # Provide a default API URL that can be overridden at build/runtime
 ARG NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/api/v1
@@ -23,5 +31,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Start the application
 CMD ["pnpm", "start"]

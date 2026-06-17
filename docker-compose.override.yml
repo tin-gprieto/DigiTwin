@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build:
+      target: dev
+    volumes:
+      - ./app-mobile:/app
+      - /app/node_modules
+      - /app/.next
+    command: pnpm dev
