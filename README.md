@@ -83,6 +83,35 @@ These can be customised in `docker-compose.yml` under the `backend` service.
 
 The `docker-compose.yml` mounts `./api-backend/data` as a volume at `/app/data`, so you can modify crop/soil/weather data without rebuilding the image.
 
+### Frontend Hot Reload (Dev Mode)
+
+`docker-compose.override.yml` is loaded automatically by `docker compose` alongside `docker-compose.yml`, so a plain `docker compose up --build` runs the `frontend` service from the `dev` stage of `app-mobile/Dockerfile` (`pnpm dev` with Turbopack) instead of a production build, with `app-mobile/` bind-mounted into the container. Edits to frontend source files are picked up immediately, no rebuild needed.
+
+To run the frontend as a production build instead (the `production` stage in `app-mobile/Dockerfile`), ignore the override file explicitly:
+
+```bash
+docker compose -f docker-compose.yml up --build
+```
+
+---
+
+## Makefile
+
+For local development without Docker, a `Makefile` at the repo root wraps the main backend and frontend commands:
+
+```bash
+make install   # Instala dependencias del backend (venv + pip) y frontend (pnpm) en simultaneo
+make backend   # Levanta la API FastAPI (uvicorn --reload) en :8000
+make frontend  # Levanta el frontend Next.js (pnpm dev) en :3000
+make dev       # Levanta backend y frontend juntos
+make test      # Corre los tests del backend (pytest)
+make lint      # Corre el lint del frontend (eslint)
+make docker-up    # docker compose up --build
+make docker-down  # docker compose down
+```
+
+Run `make help` to see the full list of targets.
+
 ---
 
 ## Project Structure
