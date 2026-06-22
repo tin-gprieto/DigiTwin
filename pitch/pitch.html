@@ -41,6 +41,7 @@
     background: var(--background);
     color: var(--foreground);
     font-family: 'Geist', system-ui, sans-serif;
+    font-size: 1rem; line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -99,9 +100,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 7rem 5vw 4rem;
+    padding: 7rem 2.5vw 4rem;
   }
-  .slide-inner { max-width: 1180px; margin: 0 auto; width: 100%; }
+  .slide-inner { max-width: 1360px; margin: 0 auto; width: 100%; }
 
   /* The chip is now the slide's title; h1 is demoted to a subtitle beneath it */
   .eyebrow {
@@ -144,12 +145,13 @@
     border-radius: var(--radius);
     padding: 1.25rem 1.4rem;
     display: flex; flex-direction: column; gap: 0.5rem;
+    font-size: 1.15rem;
   }
   .card-title {
     display: flex; align-items: center; gap: 0.6rem;
-    font-weight: 600; font-size: 0.95rem; margin: 0 0 0.7rem ;
+    font-weight: 600; font-size: 1.22em; margin: 0 0 0.7rem ;
   }
-  .card-desc { color: var(--muted-foreground); font-size: 0.85rem; line-height: 1.5; margin: 0; }
+  .card-desc { color: var(--muted-foreground); font-size: 0.9em; line-height: 1.5; margin: 0; }
 
   .icon-badge {
     display: flex; align-items: center; justify-content: center;
@@ -163,6 +165,7 @@
   .icon-badge.lg svg { width: 1.4rem; height: 1.4rem; }
   .icon-badge.digitwin-mark { background: var(--primary); color: var(--primary-foreground); }
   .card-photo {
+    position: relative;
     margin: -1.25rem -1.4rem 0.9rem;
     border-radius: var(--radius) var(--radius) 0 0;
     overflow: hidden;
@@ -180,7 +183,7 @@
   /* ---------- Stat grid (slide 2) ---------- */
   .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.75rem; }
   .stat-card { --chart: var(--chart-1); }
-  .stat-card .card-title { font-size: 1.02rem; margin-bottom: 0.7rem; }
+  .stat-card .card-title { font-size: 1.22em; margin-bottom: 0.7rem; }
   .stat-number {
     font-size: clamp(1.5rem, 2.2vw, 2rem);
     font-weight: 800; letter-spacing: -0.02em;
@@ -193,8 +196,34 @@
     background: var(--secondary); border: 1px solid var(--border);
     border-radius: 0.6rem; padding: 0.65rem 0.7rem;
   }
-  .stat-mini .stat-number { display: block; font-size: 1.3rem; margin: 0; }
-  .stat-mini .stat-sub { display: block; font-size: 0.68rem; color: var(--muted-foreground); }
+  .stat-mini .stat-number { display: block; font-size: 1.3em; margin: 0; }
+  .stat-mini .stat-sub { display: block; font-size: 0.68em; color: var(--muted-foreground); }
+
+  /* ---------- Slide 2: imágenes verticales + ventajas/desventajas ---------- */
+  .context-layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.75rem; align-items: stretch; }
+  .context-images { display: flex; flex-direction: column; gap: 1rem; }
+  .context-images .img-frame { flex: 1; min-height: 0; }
+  .context-images .img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .context-right { display: flex; flex-direction: column; gap: 1.6rem; }
+  .context-section { display: flex; flex-direction: column; gap: 0.9rem; }
+  .context-heading {
+    display: inline-flex; align-items: center; gap: 0.5rem; width: fit-content; margin: 0;
+    font-size: 1.1rem; font-weight: 700; letter-spacing: 0.01em;
+    padding: 0.32rem 0.9rem; border-radius: 999px;
+  }
+  .context-heading svg { width: 1.05rem; height: 1.05rem; }
+  .context-heading-pro {
+    color: var(--chart-1);
+    background: color-mix(in srgb, var(--chart-1) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--chart-1) 30%, transparent);
+  }
+  .context-heading-con {
+    color: var(--chart-4);
+    background: color-mix(in srgb, var(--chart-4) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--chart-4) 30%, transparent);
+  }
+  .context-layout .stat-grid { margin-bottom: 0; }
+  .problem-card { gap: 0.4rem; }
 
   .img-row { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1rem; margin-bottom: 1.75rem; }
   .img-frame {
@@ -214,7 +243,7 @@
   .bullet-list { list-style: none; margin: 0.75rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; }
   .bullet-list li {
     display: flex; align-items: flex-start; gap: 0.55rem;
-    font-size: 0.86rem; color: var(--card-foreground); line-height: 1.45;
+    font-size: 0.86em; color: var(--card-foreground); line-height: 1.45;
   }
   .bullet-list .icon-badge { height: 1.5rem; width: 1.5rem; border-radius: 0.4rem; margin-top: 0.05rem; }
   .bullet-list .icon-badge svg { width: 0.85rem; height: 0.85rem; }
@@ -235,8 +264,24 @@
   .place-tag strong { font-size: 0.85rem; }
   .place-tag span.desc { font-size: 0.78rem; color: var(--muted-foreground); }
 
+  /* ---------- Slide 4: público objetivo en columnas de tarjetas ---------- */
+  .audience-col { display: flex; flex-direction: column; gap: 1rem; }
+  .audience-tag {
+    position: absolute; top: 0.7rem; left: 0.7rem; z-index: 1;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.95rem; font-weight: 700; letter-spacing: 0.01em;
+    padding: 0.36rem 0.85rem; border-radius: 999px;
+    background: color-mix(in srgb, var(--background) 82%, transparent);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--border); color: var(--foreground);
+  }
+  .audience-tag svg { width: 1.05rem; height: 1.05rem; }
+  .subcard { flex-direction: row; align-items: center; gap: 0.75rem; padding: 0.85rem 1rem; }
+  .subcard strong { font-size: 1.12rem; }
+  .subcard .desc { font-size: 1rem; color: var(--muted-foreground); }
+
   /* ---------- Slide 4: text+cycle in one left column, screenshots cascaded in the right column ---------- */
-  #s4 .slide-inner { max-width: 1340px; }
+  #s3 .slide-inner { max-width: 1480px; }
   .s5-layout { display: grid; grid-template-columns: 0.75fr 1.5fr; gap: 1.5rem; align-items: start; }
   .s5-left { display: flex; flex-direction: column; gap: 1.25rem; }
   .s5-left .lead { margin-bottom: 0; }
@@ -253,7 +298,7 @@
   /* ---------- Cycle (slide 5) — circular layout ---------- */
   .cycle-circle {
     position: relative;
-    width: clamp(280px, 28vw, 380px);
+    width: clamp(360px, 36vw, 500px);
     aspect-ratio: 1;
     margin: 0.5rem auto 0;
   }
@@ -261,27 +306,29 @@
   .cycle-node {
     position: absolute;
     transform: translate(-50%, -50%);
-    display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center;
     background: var(--card);
     border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 0.8rem 0.8rem; width: 7.6rem; z-index: 2;
+    padding: 1rem 0.9rem; width: 9.6rem; z-index: 2;
     box-shadow: 0 10px 28px -16px rgba(0,0,0,0.25);
   }
+  .cycle-node .icon-badge.lg { height: 3.4rem; width: 3.4rem; }
+  .cycle-node .icon-badge.lg svg { width: 1.75rem; height: 1.75rem; }
   .cycle-node-highlight {
     background: color-mix(in srgb, var(--primary) 10%, var(--card));
     border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
   }
-  .cycle-node span.label { font-weight: 600; font-size: 0.82rem; }
-  .cycle-node span.sub { font-size: 0.6rem; color: var(--muted-foreground); line-height: 1.25; }
+  .cycle-node span.label { font-weight: 600; font-size: 1.05rem; }
+  .cycle-node span.sub { font-size: 0.78rem; color: var(--muted-foreground); line-height: 1.3; }
   .cycle-center {
     position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-    display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
     color: var(--muted-foreground); z-index: 1; text-align: center;
   }
-  .cycle-center svg { width: 1.3rem; height: 1.3rem; color: var(--primary); }
+  .cycle-center svg { width: 1.75rem; height: 1.75rem; color: var(--primary); }
   .cycle-center span {
-    font-size: 0.58rem; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.05em; max-width: 5.5rem;
+    font-size: 0.78rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; max-width: 7rem;
   }
 
   /* "Inside a computer": browser-window chrome wrapping each screenshot */
@@ -318,7 +365,10 @@
   }
 
   /* ---------- Stage timeline (slide 6) — exponential growth curve + 3 stages ---------- */
-  .timeline { margin-top: 1.5rem; }
+  .timeline { margin-top: -3rem; }
+  #s5 .timeline .card,
+  #s5 .timeline .exchange-card,
+  #s5 .timeline .plan-card { font-size: 1.4rem; }
   .timeline-curve { position: relative; height: 6.5rem; margin-bottom: 1rem; }
   .timeline-curve-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
   .timeline-dot {
@@ -335,21 +385,26 @@
     border: 2px solid var(--violet);
   }
   .timeline-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: start; }
-  .timeline-cards > *:nth-child(1) { margin-top: 1.5rem; }
+  .timeline-cards > *:nth-child(1) { margin-top: 3.25rem; }
   .timeline-cards > *:nth-child(2) { margin-top: 0.75rem; }
-  .timeline-cards > *:nth-child(3) { margin-top: 0; }
+  .timeline-cards > *:nth-child(3) { margin-top: -1.5rem; }
   .timeline-col { display: flex; flex-direction: column; gap: 1rem; }
   .stage-card { width: 100%; text-align: left; display: flex; flex-direction: column; gap: 0.6rem; }
-  .stage-card h3 { margin: 0; font-size: 1rem; font-weight: 600; }
-  .stage-card p { margin: 0; font-size: 0.82rem; color: var(--muted-foreground); line-height: 1.5; }
+  .stage-card h3 { margin: 0; font-size: 1.18em; font-weight: 600; }
+  .stage-card p { margin: 0; font-size: 0.82em; color: var(--muted-foreground); line-height: 1.5; }
   .stage-card-challenge {
     border-style: dashed;
-    border-color: color-mix(in srgb, var(--violet) 45%, var(--border));
-    background: color-mix(in srgb, var(--violet) 6%, var(--card));
+    border-color: color-mix(in srgb, var(--chart-1) 45%, var(--border));
+    background: color-mix(in srgb, var(--chart-1) 6%, var(--card));
   }
+  .stage-card-ally {
+    flex-direction: row; align-items: center; gap: 0.7rem;
+    padding: 0.7rem 0.9rem;
+  }
+  .stage-card-ally p { font-size: 0.78em; }
   .stage-tag {
     display: inline-flex; align-items: center; width: fit-content;
-    font-family: 'Geist Mono', monospace; font-size: 0.66rem; font-weight: 700;
+    font-family: 'Geist Mono', monospace; font-size: 0.66em; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.05em;
     color: var(--chart); background: color-mix(in srgb, var(--chart) 14%, transparent);
     border: 1px solid color-mix(in srgb, var(--chart) 30%, transparent);
@@ -360,7 +415,7 @@
   }
   .funding-tag {
     display: inline-flex; align-items: center; gap: 0.35rem; width: fit-content;
-    font-size: 0.76rem; font-weight: 600; color: var(--foreground);
+    font-size: 0.76em; font-weight: 600; color: var(--foreground);
     background: color-mix(in srgb, var(--chart) 10%, transparent);
     border: 1px solid color-mix(in srgb, var(--chart) 26%, transparent);
     padding: 0.35rem 0.65rem; border-radius: 0.5rem;
@@ -374,35 +429,43 @@
     border: 1px solid var(--border);
     border-radius: 0.6rem; padding: 0.6rem 0.7rem;
     display: flex; flex-direction: column; gap: 0.3rem;
+    font-size: 1.15rem;
   }
   .exchange-label {
     display: inline-flex; align-items: center; gap: 0.35rem;
-    font-family: 'Geist Mono', monospace; font-size: 0.64rem; font-weight: 700;
+    font-family: 'Geist Mono', monospace; font-size: 0.64em; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.04em;
     color: var(--chart);
   }
   .exchange-label svg { width: 0.75rem; height: 0.75rem; }
-  .exchange-card p { margin: 0; font-size: 0.78rem; color: var(--card-foreground); line-height: 1.4; }
+  .exchange-card p { margin: 0; font-size: 0.78em; color: var(--card-foreground); line-height: 1.4; }
   .exchange-direction {
     display: inline-flex; align-items: center; gap: 0.3rem;
-    font-size: 0.68rem; color: var(--muted-foreground);
+    font-size: 0.68em; color: var(--muted-foreground);
   }
   .exchange-direction svg { width: 0.65rem; height: 0.65rem; flex-shrink: 0; }
+  .reward-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+  .reward-list li { display: flex; align-items: center; gap: 0.35rem; font-size: 0.68em; color: var(--card-foreground); line-height: 1.4; }
+  .reward-list li::before { content: "•"; color: var(--muted-foreground); }
+  .reward-premium { display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 700; color: var(--chart-3); }
+  .reward-premium svg { width: 0.95em; height: 0.95em; }
 
   /* Lanzamiento: subscription plans pulled out as their own pricing-style cards, stacked below the stage card */
+  .plans-card .card-title { margin-bottom: 0.7rem; }
+  .plans-card .plan-card { background: var(--card); box-shadow: none; }
   .plans-grid { display: flex; flex-direction: column; gap: 0.6rem; }
   .plan-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 0.6rem;
     padding: 0.6rem 0.8rem;
     display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem;
     box-shadow: 0 10px 24px -18px rgba(0,0,0,0.25);
+    font-size: 1.15rem;
   }
-  .plan-name { display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 700; font-size: 0.82rem; flex-shrink: 0; }
+  .plan-name { display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 700; font-size: 0.82em; flex-shrink: 0; }
   .plan-name svg { width: 0.85rem; height: 0.85rem; color: var(--chart, var(--muted-foreground)); }
-  .plan-desc { margin: 0; font-size: 0.72rem; color: var(--muted-foreground); line-height: 1.4; text-align: right; }
+  .plan-desc { margin: 0; font-size: 0.72em; color: var(--muted-foreground); line-height: 1.4; text-align: right; }
   .plan-card-premium {
     border-color: color-mix(in srgb, var(--chart-3) 45%, var(--border));
-    background: color-mix(in srgb, var(--chart-3) 6%, var(--card));
   }
   .plan-card-premium .plan-name { color: var(--chart-3); }
 
@@ -418,19 +481,23 @@
   .cover .brand-mark svg { width: 2.5rem; height: 2.5rem; }
   .cover h1 { font-size: clamp(2.6rem, 6vw, 4.5rem); margin: 0; color: inherit; }
   .cover .tagline { font-size: clamp(1.05rem, 1.6vw, 1.4rem); color: oklch(0.85 0.02 145); margin: 1rem 0 2rem; max-width: 46ch; }
-  .cover .pillline { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
-  .cover .badge { background: rgba(255,255,255,0.1); color: oklch(0.97 0.01 145); border-color: rgba(255,255,255,0.22); }
+  .cover .pillline { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; }
+  .cover .badge {
+    background: rgba(255,255,255,0.1); color: oklch(0.97 0.01 145); border-color: rgba(255,255,255,0.22);
+    font-size: 1.05rem; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 0.7rem;
+  }
+  .cover .badge svg { width: 1.15rem !important; height: 1.15rem !important; }
 
   /* ---------- Closing slide (slide 7) contact block, scaled down within the cover style ---------- */
-  .cover-contact { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-  .cover-contact .contact-name { font-size: 0.82rem; font-weight: 600; color: oklch(0.95 0.01 145); margin: 0; }
+  .cover-contact { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+  .cover-contact .contact-name { font-size: 1.25rem; font-weight: 600; color: oklch(0.95 0.01 145); margin: 0; }
   .cover-contact .contact-row {
-    display: inline-flex; align-items: center; gap: 0.4rem;
+    display: inline-flex; align-items: center; gap: 0.5rem;
     background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.22);
     color: oklch(0.95 0.01 145);
-    border-radius: 999px; padding: 0.3rem 0.75rem; font-size: 0.72rem;
+    border-radius: 999px; padding: 0.45rem 1rem; font-size: 1rem;
   }
-  .cover-contact .contact-row svg { width: 0.8rem; height: 0.8rem; flex-shrink: 0; }
+  .cover-contact .contact-row svg { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
 
   /* ---------- Dot nav ---------- */
   .dotnav {
@@ -444,21 +511,21 @@
   .dotnav a.active { background: var(--primary); transform: scale(1.35); }
 
   /* ---------- Slides 3 & 5: icon above the title, bigger, larger type ---------- */
-  #s3 .card-title, #s5 .card-title {
+  #s4 .card-title {
     flex-direction: column; align-items: center; text-align: center;
-    font-size: 1.3rem; gap: 0.9rem; margin-bottom: 0.8rem;
+    font-size: 1.22em; gap: 0.9rem; margin-bottom: 0.8rem;
   }
-  #s3 .card-desc, #s5 .card-desc { font-size: 1rem; }
-  #s3 .bullet-list li, #s5 .bullet-list li { font-size: 1rem; }
-  #s3 .icon-badge.lg, #s5 .icon-badge.lg { height: 3.6rem; width: 3.6rem; }
-  #s3 .icon-badge.lg svg, #s5 .icon-badge.lg svg { width: 1.9rem; height: 1.9rem; }
-  #s3 .icon-badge.xlg, #s5 .icon-badge.xlg { height: 6.5rem; width: 6.5rem; }
-  #s3 .icon-badge.xlg svg, #s5 .icon-badge.xlg svg { width: 4.25rem; height: 4.25rem; }
-  #s5 .place-tag strong { font-size: 0.95rem; }
-  #s5 .place-tag span.desc { font-size: 0.85rem; }
+  #s4 .card-desc { font-size: 1em; }
+  #s4 .bullet-list li { font-size: 1em; }
+  #s4 .icon-badge.lg { height: 3.6rem; width: 3.6rem; }
+  #s4 .icon-badge.lg svg { width: 1.9rem; height: 1.9rem; }
+  #s4 .icon-badge.xlg { height: 6.5rem; width: 6.5rem; }
+  #s4 .icon-badge.xlg svg { width: 4.25rem; height: 4.25rem; }
+  #s4 .place-tag strong { font-size: 0.95rem; }
+  #s4 .place-tag span.desc { font-size: 0.85rem; }
 
   @media (max-width: 880px) {
-    .stat-grid, .col-2, .col-3, .img-row, .timeline-cards, .s5-layout, .stat-mini-grid { grid-template-columns: 1fr; }
+    .stat-grid, .col-2, .col-3, .img-row, .timeline-cards, .s5-layout, .stat-mini-grid, .context-layout { grid-template-columns: 1fr; }
     .timeline-curve { display: none; }
     .dotnav { display: none; }
   }
@@ -479,7 +546,7 @@
       <div class="brand-mark"><i data-lucide="sprout"></i></div>
       <span class="brand-name">DigiTwin</span>
     </div>
-    <span class="slide-counter" id="counter">01 / 07</span>
+    <span class="slide-counter" id="counter">01 / 06</span>
   </header>
 
   <nav class="dotnav" id="dotnav">
@@ -489,7 +556,6 @@
     <a href="#s4" data-i="4"></a>
     <a href="#s5" data-i="5"></a>
     <a href="#s6" data-i="6"></a>
-    <a href="#s7" data-i="7"></a>
   </nav>
 
   <main class="deck" id="deck">
@@ -513,94 +579,87 @@
       </div>
     </section>
 
-    <!-- 2. CONTEXTO -->
+    <!-- 2. CONTEXTO: ventajas y desventajas -->
     <section class="slide" id="s2">
       <div class="slide-inner">
-        <span class="eyebrow"><i data-lucide="sprout"></i> Contexto</span>
-        <h1>¿Qué son los cultivos hidropónicos?</h1>
+        <span class="eyebrow"><i data-lucide="sprout"></i>¿Qué son los cultivos hidropónicos?</span>
         <p class="lead">Una nueva solución con <b>gran potencial futuro</b>: sistemas de producción agrícola sin suelo, donde las raíces se nutren directamente de una solución de agua y nutrientes.</p>
 
-        <div class="stat-grid">
-          <div class="card stat-card" style="--chart: var(--chart-2)">
-            <div class="card-title"><div class="icon-badge"><i data-lucide="gauge"></i></div> Eficiencia</div>
-            <div class="stat-mini-grid">
-              <div class="stat-mini">
-                <div class="icon-badge" style="--chart: var(--chart-2)"><i data-lucide="droplets"></i></div>
-                <div><span class="stat-number">−90%</span><span class="stat-sub">agua</span></div>
+        <div class="context-layout">
+          <div class="context-images">
+            <div class="img-frame"><img src="img/cultivos-1.jpg" alt="Cultivo hidropónico en invernadero" /></div>
+            <div class="img-frame"><img src="img/cultivos-2.jpg" alt="Detalle de cultivo hidropónico" /></div>
+          </div>
+
+          <div class="context-right">
+            <div class="context-section">
+              <h2 class="context-heading context-heading-pro"><i data-lucide="circle-check-big"></i> Ventajas</h2>
+              <div class="stat-grid">
+                <div class="card stat-card" style="--chart: var(--chart-2)">
+                  <div class="card-title"><div class="icon-badge"><i data-lucide="gauge"></i></div> Eficiencia</div>
+                  <div class="stat-mini-grid">
+                    <div class="stat-mini">
+                      <div class="icon-badge" style="--chart: var(--chart-2)"><i data-lucide="droplets"></i></div>
+                      <div><span class="stat-number">−90%</span><span class="stat-sub">agua</span></div>
+                    </div>
+                    <div class="stat-mini">
+                      <div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="layout-grid"></i></div>
+                      <div><span class="stat-number">3–10×</span><span class="stat-sub">espacio</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card stat-card" style="--chart: var(--chart-3)">
+                  <div class="card-title"><div class="icon-badge"><i data-lucide="leaf"></i></div> Sustentabilidad</div>
+                  <ul class="bullet-list">
+                    <li><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="flask-conical"></i></div> Evita pesticidas y agroquímicos</li>
+                    <li><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="droplets"></i></div> Contamina menos el agua</li>
+                  </ul>
+                </div>
+                <div class="card stat-card" style="--chart: var(--chart-5)">
+                  <div class="card-title"><div class="icon-badge"><i data-lucide="globe"></i></div> Universalidad</div>
+                  <ul class="bullet-list">
+                    <li><div class="icon-badge" style="--chart: var(--chart-5)"><i data-lucide="building-2"></i></div> Zonas urbanas o poco fértiles</li>
+                    <li><div class="icon-badge" style="--chart: var(--chart-5)"><i data-lucide="layers"></i></div> Homogeneización de los cultivos</li>
+                  </ul>
+                </div>
               </div>
-              <div class="stat-mini">
-                <div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="layout-grid"></i></div>
-                <div><span class="stat-number">3–10×</span><span class="stat-sub">espacio</span></div>
+            </div>
+
+            <div class="context-section">
+              <h2 class="context-heading context-heading-con"><i data-lucide="alert-triangle"></i> Desventajas</h2>
+              <div class="col-2">
+                <div class="card problem-card">
+                  <div class="card-title"><div class="icon-badge" style="--chart: var(--chart-4)"><i data-lucide="banknote"></i></div> Alta inversión inicial</div>
+                  <p class="card-desc">Equipar un sistema funcional exige <b>componentes especializados</b> desde el primer día.</p>
+                  <ul class="bullet-list">
+                    <li><div class="icon-badge" style="--chart: var(--chart-4)"><i data-lucide="gauge"></i></div> Medidores de conductividad y pH para la solución nutritiva</li>
+                    <li><div class="icon-badge" style="--chart: var(--chart-4)"><i data-lucide="lightbulb"></i></div> Sistemas de iluminación</li>
+                    <li><div class="icon-badge" style="--chart: var(--chart-4)"><i data-lucide="wind"></i></div> Control del aire</li>
+                  </ul>
+                </div>
+
+                <div class="card problem-card">
+                  <div class="card-title"><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="wrench"></i></div> Mantenimiento y personal calificado</div>
+                  <p class="card-desc">Mantener el sistema equilibrado exige <b>conocimiento técnico constante</b>: cualquier desvío en nutrientes, pH o ambiente impacta el rendimiento.</p>
+                  <ul class="bullet-list">
+                    <li><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="wrench"></i></div> Ajustes frecuentes para equilibrar el sistema</li>
+                    <li><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="brain"></i></div> Curva de aprendizaje pronunciada para nuevos productores</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-          <div class="card stat-card" style="--chart: var(--chart-3)">
-            <div class="card-title"><div class="icon-badge"><i data-lucide="leaf"></i></div> Sustentabilidad</div>
-            <ul class="bullet-list">
-              <li><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="flask-conical"></i></div> Evita pesticidas y agroquímicos</li>
-              <li><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="droplets"></i></div> Contamina menos el agua</li>
-            </ul>
-          </div>
-          <div class="card stat-card" style="--chart: var(--chart-5)">
-            <div class="card-title"><div class="icon-badge"><i data-lucide="globe"></i></div> Deslocalización</div>
-            <ul class="bullet-list">
-              <li><div class="icon-badge" style="--chart: var(--chart-5)"><i data-lucide="building-2"></i></div> Zonas urbanas o poco fértiles</li>
-              <li><div class="icon-badge" style="--chart: var(--chart-5)"><i data-lucide="layers"></i></div> Homogeneización de los cultivos</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="img-row">
-          <div class="img-frame"><img src="img/cultivos-1.jpg" alt="Cultivo hidropónico en invernadero" /></div>
-          <div class="img-frame"><img src="img/cultivos-2.jpg" alt="Detalle de cultivo hidropónico" /></div>
         </div>
       </div>
     </section>
 
-    <!-- 3. PROBLEMAS -->
+    <!-- 3. NUESTRO PRODUCTO -->
     <section class="slide" id="s3">
-      <div class="slide-inner">
-        <span class="eyebrow"><i data-lucide="alert-triangle"></i> El problema</span>
-        <h1>Problemas de los cultivos hidropónicos</h1>
-        <p class="lead">El potencial es enorme, pero la barrera de entrada hoy es alta tanto en capital como en conocimiento técnico.</p>
-
-        <div class="col-2">
-          <div class="card">
-            <div class="card-photo"><img src="img/inversion.png" alt="Alta inversión inicial en tecnología" /></div>
-            <div class="card-title">
-              Alta inversión inicial en tecnología
-            </div>
-            <p class="card-desc">Equipar un sistema hidropónico funcional requiere varios <b>componentes especializados</b> desde el primer día.</p>
-            <ul class="bullet-list">
-              <li><div class="icon-badge" style="--chart: var(--chart-4)"><i data-lucide="gauge"></i></div> Medidores de conductividad y pH para la solución nutritiva</li>
-              <li><div class="icon-badge" style="--chart: var(--chart-4)"><i data-lucide="lightbulb"></i></div> Sistemas de iluminación</li>
-              <li><div class="icon-badge" style="--chart: var(--chart-4)"><i data-lucide="wind"></i></div> Control del aire</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="card-photo"><img src="img/control.jpg" alt="Mantenimiento alto y personal calificado" /></div>
-            <div class="card-title">
-              Mantenimiento alto y personal calificado
-            </div>
-            <p class="card-desc">Mantener el <b>sistema equilibrado</b> exige conocimiento técnico constante: cualquier desvío en nutrientes, pH o ambiente impacta directo en el rendimiento del cultivo.</p>
-            <ul class="bullet-list">
-              <li><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="wrench"></i></div> Ajustes frecuentes para equilibrar el sistema</li>
-              <li><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="brain"></i></div> Curva de aprendizaje pronunciada para nuevos productores</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. NUESTRO PRODUCTO -->
-    <section class="slide" id="s4">
       <div class="slide-inner">
         <div class="s5-layout">
           <div class="s5-left">
             <div>
-              <span class="eyebrow"><i data-lucide="sprout"></i> Nuestro producto</span>
-              <h1>¿Cómo lo resolvemos?</h1>
+              <span class="eyebrow"><i data-lucide="sprout"></i> ¿Cómo lo resolvemos?</span>
               <p class="lead"><b class="hint">DigiTwin</b> es una plataforma de <b>gemelos digitales</b> que simula el crecimiento de cultivos hidropónicos antes y durante la producción, dando solución a los <b>problemas de inversión y conocimiento técnico</b>, y poniendo en valor cada decisión del cultivo.</p>
             </div>
 
@@ -662,49 +721,66 @@
       </div>
     </section>
 
-    <!-- 5. OPORTUNIDAD -->
-    <section class="slide" id="s5">
+    <!-- 4. OPORTUNIDAD -->
+    <section class="slide" id="s4">
       <div class="slide-inner">
-        <span class="eyebrow"><i data-lucide="target"></i> Oportunidad</span>
-        <h1>Dos mercados listos para adoptar hidroponía inteligente</h1>
+        <span class="eyebrow"><i data-lucide="target"></i> Publico objetivo</span>
+        <h1>Dos tipos de clientes listos para adoptar hidroponía inteligente</h1>
 
         <div class="col-2">
-          <div class="card">
-            <div class="card-photo"><img src="img/zonas-marginales.jpg" alt="Productores agrícolas locales en zonas extremas" /></div>
-            <div class="card-title">
-              Productores agrícolas locales en zonas extremas
+          <div class="audience-col">
+            <div class="card">
+              <div class="card-photo">
+                <span class="audience-tag"><i data-lucide="flag"></i> Argentina</span>
+                <img src="img/zonas-marginales.jpg" alt="Productores agrícolas locales en zonas extremas" />
+              </div>
+              <div class="card-title">
+                Productores agrícolas locales en zonas extremas
+              </div>
+              <p class="card-desc">Maximiza recursos en lugares con dificultad para cultivar de forma convencional producto de sus <b>condiciones climáticas</b> o producto del <b>uso intensivo del suelo</b>.</p>
             </div>
-            <p class="card-desc">Maximiza recursos en lugares con dificultad para cultivar de forma convencional producto de sus <b>condiciones climáticas</b> o producto del <b>uso intensivo del suelo</b>.</p>
-            <div class="place-tag">
+
+            <div class="card subcard">
               <div class="icon-badge" style="--chart: var(--chart-2)"><i data-lucide="droplets"></i></div>
               <div><strong>Cuyo</strong><br/><span class="desc">Emergencia hídrica</span></div>
             </div>
-            <div class="place-tag">
+            <div class="card subcard">
               <div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="wind"></i></div>
               <div><strong>Patagonia</strong><br/><span class="desc">Desertificación</span></div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-photo"><img src="img/huerto-urbano.jpg" alt="Pequeños agricultores urbanos y ecológicos" /></div>
-            <div class="card-title">
-              Pequeños agricultores urbanos y ecológicos
+          <div class="audience-col">
+            <div class="card">
+              <div class="card-photo">
+                <span class="audience-tag"><i data-lucide="globe"></i> Internacional</span>
+                <img src="img/huerto-urbano.jpg" alt="Pequeños agricultores urbanos y ecológicos" />
+              </div>
+              <div class="card-title">
+                Pequeños agricultores urbanos y sustentables
+              </div>
+              <p class="card-desc"><b>Tendencia internacional</b> de una alimentacion sustentable y saludabla frente a alimentos convencionales.</p>
             </div>
-            <p class="card-desc"><b>Tendencia ecológica</b> frente a alimentos convencionales poco saludables y poco sustentables.</p>
-            <div class="bullet-list-card">
-              <ul class="bullet-list">
-                <li><div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="flask-conical"></i></div> Sin agrotóxicos</li>
-                <li><div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="droplets"></i></div> Sin Contaminación del agua</li>
-                <li><div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="vector-square"></i></div> En espacios reducidos</li>
-              </ul>
+
+            <div class="card subcard">
+              <div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="flask-conical"></i></div>
+              <strong>Sin agrotóxicos</strong>
+            </div>
+            <div class="card subcard">
+              <div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="droplets"></i></div>
+              <strong>Sin contaminación del agua</strong>
+            </div>
+            <div class="card subcard">
+              <div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="vector-square"></i></div>
+              <strong>En espacios reducidos</strong>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 6. MODELO DE NEGOCIO -->
-    <section class="slide" id="s6">
+    <!-- 5. MODELO DE NEGOCIO -->
+    <section class="slide" id="s5">
       <div class="slide-inner">
         <span class="eyebrow"><i data-lucide="briefcase"></i> Modelo de negocio</span>
         <h1>Planificación</h1>
@@ -727,13 +803,12 @@
 
           <div class="timeline-cards">
             <div class="card stage-card stage-card-challenge">
-              <div class="icon-badge lg" style="--chart: var(--violet)"><i data-lucide="target"></i></div>
-              <span class="stage-tag" style="--chart: var(--violet)">El desafío</span>
+              <div class="icon-badge lg" style="--chart: var(--chart-1)"><i data-lucide="target"></i></div>
+              <span class="stage-tag" style="--chart: var(--chart-1)">El desafío</span>
               <h3>Conseguir datos suficientes</h3>
-              <p>Sin datos reales de crecimiento no se puede mejorar el modelo de simulación ni ampliar el catálogo de cultivos.</p>
               <ul class="bullet-list">
-                <li><div class="icon-badge" style="--chart: var(--violet)"><i data-lucide="trending-up"></i></div> Mejorar los modelos</li>
-                <li><div class="icon-badge" style="--chart: var(--violet)"><i data-lucide="sprout"></i></div> Ampliar catálogo de cultivos</li>
+                <li><div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="trending-up"></i></div> Mejorar los modelos</li>
+                <li><div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="sprout"></i></div> Ampliar catálogo de cultivos</li>
               </ul>
             </div>
 
@@ -743,18 +818,26 @@
                 <span class="stage-tag" style="--chart: var(--chart-2)">Validación</span>
                 <h3>Prueba Piloto</h3>
                 <span class="funding-tag" style="--chart: var(--chart-2)"><i data-lucide="hand-coins"></i> Financiamiento: Crowdfunding</span>
-                <p>A partir de alianzas estratégicas con <b>organizaciones agroecológicas</b>, formar un comunidad de pequeños agricultores para validar el modelo a cambio de <b>recompensas</b>.</p>
               </div>
-
+              <div class="card stage-card stage-card-ally">
+                <div class="icon-badge" style="--chart: var(--chart-1)"><i data-lucide="handshake"></i></div>
+                <p>Alianza estratégica con <b>organizaciones agroecológicas</b></p>
+              </div>
               <div class="exchange-grid">
                 <div class="exchange-card" style="--chart: var(--chart-3)">
                   <span class="exchange-label"><i data-lucide="gift" style="width:0.75rem;height:0.75rem;"></i> Recompensa</span>
-                  <p>Acceso anticipado + Plan premium</p>
+                  <ul class="reward-list">
+                    <li>Acceso anticipado</li>
+                    <li><span class="reward-premium"><i data-lucide="circle-star"></i> Plan premium</span></li>
+                  </ul>
                   <span class="exchange-direction"><i data-lucide="arrow-right"></i> Para el productor</span>
                 </div>
                 <div class="exchange-card" style="--chart: var(--chart-1)">
-                  <span class="exchange-label"><i data-lucide="handshake" style="width:0.75rem;height:0.75rem;"></i> Retribución</span>
-                  <p>Datos de cultivo para mejorar el modelo</p>
+                  <span class="exchange-label"><i data-lucide="hand-heart" style="width:0.75rem;height:0.75rem;"></i> Retribución</span>
+                  <ul class="reward-list">
+                    <li>Donaciones</li>
+                    <li><i data-lucide="database" style="width:0.85rem;height:0.85rem;"></i> <b>Datos</b> para el modelo</li>
+                  </ul>
                   <span class="exchange-direction"><i data-lucide="arrow-left"></i> Del productor</span>
                 </div>
               </div>
@@ -764,23 +847,25 @@
               <div class="card stage-card">
                 <div class="icon-badge lg" style="--chart: var(--chart-3)"><i data-lucide="rocket"></i></div>
                 <span class="stage-tag" style="--chart: var(--chart-3)">Crecimiento</span>
-                <h3>Lanzamiento</h3>
+                <h3>Lanzamiento publico</h3>
                 <span class="funding-tag" style="--chart: var(--chart-3)"><i data-lucide="credit-card"></i> Financiamiento: Suscripción</span>
-                <p>Sistema de subscripción para escalar el acceso a la plataforma a medida que crece la base de datos del modelo.</p>
-              </div>
+               </div>
 
-              <div class="plans-grid">
-                <div class="plan-card">
-                  <span class="plan-name"><i data-lucide="badge-percent"></i> Free Trial</span>
-                  <p class="plan-desc">Un mes de acceso al plan premium</p>
-                </div>
-                <div class="plan-card">
-                  <span class="plan-name">Básico</span>
-                  <p class="plan-desc">Simulaciones <b>limitadas</b> por mes</p>
-                </div>
-                <div class="plan-card plan-card-premium">
-                  <span class="plan-name" style="--chart: var(--chart-3)"><i data-lucide="circle-star"></i> Premium</span>
-                  <p class="plan-desc">Simulaciones ilimitadas</p>
+              <div class="card plans-card">
+                <div class="card-title"><div class="icon-badge" style="--chart: var(--chart-3)"><i data-lucide="credit-card"></i></div> Planes de suscripción</div>
+                <div class="plans-grid">
+                  <div class="plan-card">
+                    <span class="plan-name"><i data-lucide="badge-percent"></i> Free Trial</span>
+                    <p class="plan-desc">Un <b>mes</b> de plan premium</p>
+                  </div>
+                  <div class="plan-card">
+                    <span class="plan-name">Básico</span>
+                    <p class="plan-desc">Simulaciones <b>limitadas</b>/mes</p>
+                  </div>
+                  <div class="plan-card plan-card-premium">
+                    <span class="plan-name" style="--chart: var(--chart-3)"><i data-lucide="circle-star"></i> Premium</span>
+                    <p class="plan-desc">Simulaciones <b>ilimitadas</b></p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -789,8 +874,8 @@
       </div>
     </section>
 
-    <!-- 7. GRACIAS / CONTACTO -->
-    <section class="slide cover" id="s7">
+    <!-- 6. GRACIAS / CONTACTO -->
+    <section class="slide cover" id="s6">
       <div class="brand-mark"><i data-lucide="heart-handshake"></i></div>
       <h1>¡Gracias!</h1>
       <p class="tagline">Gracias por tu tiempo y por considerar a DigiTwin como aliado para el futuro de la hidroponía.</p>
